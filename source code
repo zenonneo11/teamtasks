@@ -32,16 +32,28 @@ public:
   // Обновить статусы по данному количеству задач конкретного разработчика,
   // подробности см. ниже
   std::tuple<TasksInfo, TasksInfo> PerformPersonTasks(const std::string& person, int task_count){
-      if (person_to_tasks.count(person)==0) {
-          return make_tuple(TasksInfo(),TasksInfo());
-          }else{
-            TasksInfo new_tasks;
-          for (auto item:person_to_tasks[person]){
-              new_tasks[item.first]=max(0,item.second-task_count);
-          }
+      
 
-          
-      }
+  / *      TasksInfo m{{TaskStatus::NEW,2},{TaskStatus::IN_PROGRESS,1},{TaskStatus::TESTING,2},{TaskStatus::DONE,1}};  
+vector<int> v;
+
+for(auto& item : m){
+    v.insert(v.end(),item.second,static_cast<int>(item.first));
+}
+ for (const auto& el:v){
+ cout<<el;    
+ }
+cout<<endl;
+int count=4;
+for(size_t i=0;i+1<v.size()&&count!=0;++i){
+    ++v[i];
+    --count;
+ }
+ 
+ for (const auto& el:v){
+ cout<<el;    
+ }   
+      }*/
   }
 
 private:
