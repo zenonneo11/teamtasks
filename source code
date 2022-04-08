@@ -1,0 +1,59 @@
+// Реализуйте функции и методы классов и при необходимости добавьте свои
+#include <iostream>
+#include<numeric>
+#include<map>
+
+// Перечислимый тип для статуса задачи
+enum class TaskStatus {
+  NEW,          // новая
+  IN_PROGRESS,  // в разработке
+  TESTING,      // на тестировании
+  DONE          // завершена
+};
+
+// Объявляем тип-синоним для map<TaskStatus, int>,
+// позволяющего хранить количество задач каждого статуса
+using TasksInfo = std::map<TaskStatus, int>;
+
+class TeamTasks {
+public:
+  // Получить статистику по статусам задач конкретного разработчика
+  const TasksInfo& GetPersonTasksInfo(const std::string& person) const{
+
+      return person_to_tasks.at(person);
+  }
+  
+  // Добавить новую задачу (в статусе NEW) для конкретного разработчитка
+  void AddNewTask(const std::string& person){
+
+      ++person_to_tasks[person][TaskStatus::NEW];
+  }
+  
+  // Обновить статусы по данному количеству задач конкретного разработчика,
+  // подробности см. ниже
+  std::tuple<TasksInfo, TasksInfo> PerformPersonTasks(const std::string& person, int task_count){
+      if (person_to_tasks.count(person)==0) {
+          return make_tuple(TasksInfo(),TasksInfo());
+          }else{
+            TasksInfo new_tasks;
+          for (auto item:person_to_tasks[person]){
+              new_tasks[item.first]=max(0,item.second-task_count);
+          }
+
+          
+      }
+  }
+
+private:
+std::map<std::string,TasksInfo> person_to_tasks;
+};
+
+int main(){
+    
+
+  TeamTasks tasks;
+      tasks.AddNewTask("Ilia");
+  for (int i = 0; i < 3; ++i) {
+    tasks.AddNewTask("Ivan");
+      }
+}    
